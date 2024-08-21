@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Materia {
+private:
+    int Clave;
+    string Nombre;
+    string ProfesorTutor;
+    string Libro_deTexto;
+
+public:
+  
+    Materia(int clave, const string& nombre, const string& profesor, const string& libro)   // Constructor
+        : Clave(clave), Nombre(nombre), ProfesorTutor(profesor), Libro_deTexto(libro) {}
+
+    
+    void imprime() {
+        cout << "Clave: " << Clave <<endl;
+        cout << "Nombre: " << Nombre <<endl;
+        cout << "Profesor/Tutor: " << ProfesorTutor <<endl;
+        cout << "Libro de Texto: " << Libro_deTexto <<endl;
+    }
+
+    // Metodo para cambiar la clave de la materia
+    void cambiaClave(int nuevaClave) {
+        Clave = nuevaClave;
+    }
+
+   
+    void cambiaProfe(const string& nuevoProfesor) {
+        ProfesorTutor = nuevoProfesor;
+    }
+};
+
+int main() {
+
+    Materia Programacion(101, "Programacion", "Profesor1", "Libro1");
+    Materia Base_deDatos(102, "Base_deDatos", "Profesor2", "Libro2");
+
+    int opcion;
+    do {
+        // Menú de opciones
+        cout << " Menu "<<endl;
+        cout << " 1. Cambiar clave de la materia Programacion"<<endl;
+        cout << " 2. Cambiar nombre del profesor de la materia Base_deDatos"<<endl;
+        cout << " 3. Imprimir todos los datos de la materia Base_deDatos"<<endl;
+        cout << " 0. Salir";
+        cout << " Seleccione una opcion: "<<endl;
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1: {
+                int nuevaClave;
+                cout << "Ingrese la nueva clave: ";
+                cin >> nuevaClave;
+                Programacion.cambiaClave(nuevaClave);
+                break;
+            }
+            case 2: {
+                string nuevoProfesor;
+                cout << "Ingrese el nuevo nombre del profesor: ";
+                cin.ignore(); // Limpiar el buffer de entrada
+                getline(cin, nuevoProfesor);
+                Base_deDatos.cambiaProfe(nuevoProfesor);
+                break;
+            }
+            case 3:
+                Base_deDatos.imprime();
+                break;
+            case 0:
+                cout << "Saliendo del programa";
+                break;
+            default:
+                cout << "Opcion no valida. Intentelo de nuevo";
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
